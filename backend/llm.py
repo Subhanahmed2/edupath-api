@@ -13,7 +13,7 @@ Providers (env EDUPATH_LLM):
   claude  Anthropic API via the official SDK (pip install anthropic; ANTHROPIC_API_KEY)
           EDUPATH_CLAUDE_MODEL (default claude-opus-5-5)
   groq    Groq cloud API (OpenAI-compatible, free tier; used by the deployed site) - GROQ_API_KEY
-          EDUPATH_GROQ_MODEL (default llama-3.3-70b-versatile). No extra package: plain HTTPS with httpx.
+          EDUPATH_GROQ_MODEL (default openai/gpt-oss-20b). No extra package: plain HTTPS with httpx.
   off     rules only
 EDUPATH_LLM_TIMEOUT seconds (default 60; local models on a GPU usually answer in a few seconds).
 """
@@ -93,7 +93,7 @@ class _Groq:
         self.key = os.getenv("GROQ_API_KEY", "").strip()
         if not self.key:
             raise RuntimeError("GROQ_API_KEY is not set")
-        self.model = os.getenv("EDUPATH_GROQ_MODEL", "llama-3.3-70b-versatile")
+        self.model = os.getenv("EDUPATH_GROQ_MODEL", "openai/gpt-oss-20b")
         self._why = "ready"
 
     def available(self):
