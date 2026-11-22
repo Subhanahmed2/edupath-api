@@ -31,6 +31,7 @@ import config  # noqa: E402,F401  (loads backend/.env first)
 import questionnaire as Q  # noqa: E402
 import auth  # noqa: E402
 import journeys_api  # noqa: E402
+import admin_api  # noqa: E402  (admin dashboard; EDUPATH_ADMIN_EMAILS)
 import db as DB  # noqa: E402
 
 MODEL = "A"  # A = 12 questions incl. intermediate group (deployed); B = without group question
@@ -63,6 +64,7 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 DB.init_db()  # create tables if missing
 app.include_router(auth.router)
 app.include_router(journeys_api.router)
+app.include_router(admin_api.router)
 
 
 class FieldRequest(BaseModel):
